@@ -1,0 +1,25 @@
+spring:
+    jpa:
+        hibernate:
+            ddl-auto: none
+    datasource:
+        username: root
+        password:
+        url: jdbc:mysql://localhost:3306/student-react
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    jackson:
+        date-format: yyyy-MM-dd'T'HH:mm:ss.SSSX
+springdoc:
+    swagger-ui:
+        path: /api-docs
+server:
+    port: 4000
+jwt: 
+    # to generate a PKCS#8 private key, run the command:
+    # openssl genpkey -out <output file> -algorithm RSA -pkeyopt rsa_keygen_bits:2048
+    # to generate a public key, run the command:
+    # openssl rsa -in <private key file> -pubout -out <output file>
+    private.key: classpath:app.key
+    public.key: classpath:app.pub
+    # 60 * 60 * 24 (1 day)
+    lifetime: 86400
