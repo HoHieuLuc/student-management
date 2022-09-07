@@ -39,12 +39,15 @@ public class StudentController {
         return studentService.create(student);
     }
 
+    // @formatter:off
     @PatchMapping("/{id}")
     public StudentEntity update(
             @PathVariable("id") long id,
-            @RequestBody @Valid UpdateStudentParams updateStudentParams) {
+            @RequestBody @Valid UpdateStudentParams updateStudentParams
+    ) {
         return studentService.update(id, updateStudentParams);
     }
+    // @formatter:on
 
     @DeleteMapping("/{id}")
     public StudentEntity delete(@PathVariable("id") long id) {
