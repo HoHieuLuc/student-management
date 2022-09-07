@@ -32,7 +32,7 @@ public class AuthService {
         return userRepository
                 .findByUsername(username)
                 .orElseThrow(() -> 
-                        new UnauthorizedException("Token không hợp lệ, hãy thử đăng nhập lại")
+                        new UnauthorizedException("Invalid token, please try again")
                 );
         // @formatter:on
     }
@@ -42,12 +42,12 @@ public class AuthService {
         UserEntity user = userRepository
                 .findByUsername(loginParams.getUsername())
                 .orElseThrow(() -> 
-                        new UnauthorizedException("Sai tài khoản hoặc mật khẩu")
+                        new UnauthorizedException("Wrong username or password")
                 );
         // @formatter:on
 
         if (!passwordEncoder.matches(loginParams.getPassword(), user.getPassword())) {
-            throw new UnauthorizedException("Sai tài khoản hoặc mật khẩu");
+            throw new UnauthorizedException("Wrong usename or password");
         }
 
         String token = jsonWebTokenUtils.generateToken(user.getUsername());
