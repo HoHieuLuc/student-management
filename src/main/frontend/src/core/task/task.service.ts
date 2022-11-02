@@ -6,7 +6,7 @@ const isTasks = (tasks: unknown): tasks is Array<Task> => {
 };
 
 const getAll = () => new Promise<Array<Task>>((resolve) => {
-    const data = JSON.parse(localStorage.getItem('tasks') || '') as Array<Task>;
+    const data = JSON.parse(localStorage.getItem('tasks') || '[]') as Array<Task>;
     resolve(data);
 });
 
@@ -19,7 +19,7 @@ const create = (payload: Task) => new Promise<Task>((resolve) => {
 });
 
 const update = (payload: UpdateTaskVars) => new Promise<void>((resolve) => {    
-    const data = JSON.parse(localStorage.getItem('tasks') || '') as Array<Task>;
+    const data = JSON.parse(localStorage.getItem('tasks') || '[]') as Array<Task>;
     const newData = data.map<Task>(task => {
         return task.uid === payload.id
             ? {
@@ -34,14 +34,14 @@ const update = (payload: UpdateTaskVars) => new Promise<void>((resolve) => {
 });
 
 const remove = (id: number) => new Promise<void>((resolve) => {
-    const data = JSON.parse(localStorage.getItem('tasks') || '') as Array<Task>;
+    const data = JSON.parse(localStorage.getItem('tasks') || '[]') as Array<Task>;
     const newData = data.filter(task => task.uid !== id);
     localStorage.setItem('tasks', JSON.stringify(newData));
     resolve();
 });
 
 const clearFinished = () => new Promise<void>((resolve) => {
-    const data = JSON.parse(localStorage.getItem('tasks') || '') as Array<Task>;
+    const data = JSON.parse(localStorage.getItem('tasks') || '[]') as Array<Task>;
     const newData = data.filter(task => !task.done);
     localStorage.setItem('tasks', JSON.stringify(newData));
     resolve();
